@@ -1,8 +1,9 @@
-const express = require('express').Router;
-const meetingApp = express();
+require('babel-polyfill');
+
+const express = require('express');
 const debug = require('debug')('ma:index');
 
-const router = express();
+const router = express.Router();
 
 router.use((req, res, next) => {
   debug(`/${req.method}`);
@@ -32,10 +33,8 @@ router.get('/user/:id', (req, res) => {
   });
 });
 
+const meetingApp = express();
 meetingApp.use('/', router);
-
-// Listen to this Port
-
 meetingApp.listen(3000, () => {
   debug('Live at Port 3000');
 });
