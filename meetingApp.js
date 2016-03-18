@@ -1,39 +1,40 @@
 const express = require('express');
 const meetingApp = express();
+const debug = require('debugger')('index')
 
 const router = express.Router();
 
-router.use(function(req, res, next){
-  console.log("/" + req.method);
+router.use((req, res, next) => {
+  debug(`/${req.method}`);
   next();
 });
 
-router.get("/user/:id", function(req, res, next){
-  console.log(req.params.id)
+router.get('/user/:id', (req, res, next) => {
+  debug(req.params.id)
   if (req.params.id) {
     res.json({
-      message: "You must pass ID other than 0"
+      message: 'You must pass ID other than 0'
     });
   }
   else next();
 });
 
-router.get("/",function(req,res){
+router.get('/', (req,res) => {
   res.json({
-    message : "Hello World"
+    message : 'Hello World'
   });
 });
 
-router.get("/user/:id", function(req, res, next){
+router.get('/user/:id', (req, res, next) => {
   res.json({
-    message: "Hello" + req.parms.id
+    message: `Hello ${req.parms.id}`
   });
 });
 
-meetingApp.use("/",router);
+meetingApp.use('/',router);
 
 // Listen to this Port
 
-meetingApp.listen(3000,function(){
-  console.log("Live at Port 3000");
+meetingApp.listen(3000, () => {
+  console.log('Live at Port 3000');
 });
