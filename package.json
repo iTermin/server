@@ -12,5 +12,8 @@
   },
   "author": "",
   "license": "ISC",
-  "homepage": "https://bitbucket.org/fachinota/servermeetingapp#readme"
+  "homepage": "https://bitbucket.org/fachinota/servermeetingapp#readme",
+  "dependencies": {
+    "express": "^4.13.4"
+  }
 }
