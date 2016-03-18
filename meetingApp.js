@@ -1,7 +1,7 @@
-var express = require('express');
-var meetingApp = express();
+const express = require('express');
+const meetingApp = express();
 
-var router = express.Router();
+const router = express.Router();
 
 router.use(function(req, res, next){
   console.log("/" + req.method);
@@ -12,7 +12,7 @@ router.get("/user/:id", function(req, res, next){
   console.log(req.params.id)
   if (req.params.id) {
     res.json({
-      "message": "You must pass ID other than 0"
+      message: "You must pass ID other than 0"
     });
   }
   else next();
@@ -20,13 +20,13 @@ router.get("/user/:id", function(req, res, next){
 
 router.get("/",function(req,res){
   res.json({
-    "message" : "Hello World"
+    message : "Hello World"
   });
 });
 
 router.get("/user/:id", function(req, res, next){
   res.json({
-    "message": "Hello" + req.parms.id
+    message: "Hello" + req.parms.id
   });
 });
 
