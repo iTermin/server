@@ -1,6 +1,6 @@
 const express = require('express');
 const meetingApp = express();
-const debug = require('debugger')('index')
+const debug = require('debug')('ma:index')
 
 const router = express.Router();
 
