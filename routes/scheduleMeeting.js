@@ -1,6 +1,8 @@
 const express = require('express');
 const debug = require('debug')('ma:routes/scheduleMeeting');
 
+const mailHandler = require('../handler/mailHandler');
+
 const route = express.Router();
 
 const currentMeetings = [];
@@ -13,6 +15,8 @@ route.use((req, res, next) => {
 route.post('/', (req, res) => {
   const newMeetingInfo = req.body.meetingId;
   if(newMeetingInfo) {
+    mailHandler('fachinacg@gmail.com', 'MeetingApp Test', newMeetingInfo);
+
     currentMeetings.push(newMeetingInfo);
     res.json({
       id: currentMeetings.length,
