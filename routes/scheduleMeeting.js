@@ -14,7 +14,7 @@ route.use((req, res, next) => {
 
 route.post('/', (req, res) => {
   const newMeetingInfo = req.body.meetingId;
-  if(newMeetingInfo) {
+  if (newMeetingInfo) {
     mailHandler('fachinacg@gmail.com', 'MeetingApp Test', newMeetingInfo);
 
     currentMeetings.push(newMeetingInfo);
@@ -32,7 +32,7 @@ route.post('/', (req, res) => {
 
 route.get('/', (req, res) => {
   res.json({
-    meetings: currentMeetings
+    meetings: currentMeetings,
   });
 });
 
