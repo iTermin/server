@@ -8,31 +8,35 @@ function sendInvitationFromMeeting(meetingId) {
   const firebaseRef = new Firebase("https://fiery-fire-7264.firebaseio.com");
   firebaseRef.child(`Meetings/${meetingId}`).once('value', function (dataSnapshot) {
     const meetingInformation = dataSnapshot.val();
-
+    const hostName = getMeetingHostName(meetingInformation);
+    const subject = `${hostName}'s invitation`;
     const guests = getMeetingGuests(meetingInformation);
-    const subject = getMeetingTitle(meetingInformation);
-    const newMeetingInfo = getMeetingInformation(meetingInformation);
+    for(let guestIndex = 1; guestIndex < guests.length; ++guestIndex) {
+      const guest = guests[guestIndex];
+      debug(`Sending information to the guest: ${guest.name}`);
 
-    // mailHandler(guests, subject, newMeetingInfo);
-    debug('Information: ', dataSnapshot.val());
+      const meetingHTML = getMeetingInformation(meetingInformation, guest, hostName);
+      mailHandler(guest.email, subject, meetingHTML);
+    }
   }, function (err) {
     debug('Error connecting to Firebase', err);
   });
 }
 
 function getMeetingGuests(meetingInformation) {
-  // TODO: Implement function
-  return "fachinacg@gmail.com";
+  return meetingInformation.guests;
 }
 
-function getMeetingTitle(meetingInformation) {
-  // TODO: Implement function
-  return "Subject of the meeting";
+function getMeetingHostName(meetingInformation) {
+  const hostName = meetingInformation.guests[0].name;
+  return `${hostName} invitation`;
 }
 
-function getMeetingInformation(meetingInformation) {
-  // TODO: Implement function
-  return 'Hi!';
+function getMeetingInformation(meetingInformation, guest, hostName) {
+  // TODO: Use template (#8)
+  const meetingTime = meetingInformation.detail.startDate;
+  const guestName = guest.name;
+  return `<html><body><p>Hi ${guestName} you have been invited to the ${hostName}'s meeting at: ${meetingTime}</p></body></html>`;
 }
 
 module.exports = { sendInvitationFromMeeting };
