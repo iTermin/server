@@ -24,7 +24,8 @@
     "babel-preset-stage-0": "^6.3.13",
     "body-parser": "^1.15.0",
     "es6-promise": "^3.1.2",
-    "express": "^4.13.4"
+    "express": "^4.13.4",
+    "firebase": "^2.4.1"
   },
   "engines": {
     "node": "4.4.0"

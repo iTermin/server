@@ -1,28 +1,38 @@
 'use strict';
 
 const mailHandler = require('./mailHandler');
+const Firebase = require("firebase");
+const debug = require('debug')('ma:handler:invitationHandler');
 
 function sendInvitationFromMeeting(meetingId) {
-  const guests = getMeetingGuests(meetingId);
-  const subject = getMeetingTitle(meetingId);
-  const newMeetingInfo = getMeetingInformation(meetingId);
+  const firebaseRef = new Firebase("https://fiery-fire-7264.firebaseio.com");
+  firebaseRef.child(`Meetings/${meetingId}`).once('value', function (dataSnapshot) {
+    const meetingInformation = dataSnapshot.val();
 
-  mailHandler(guests, subject, newMeetingInfo);
+    const guests = getMeetingGuests(meetingInformation);
+    const subject = getMeetingTitle(meetingInformation);
+    const newMeetingInfo = getMeetingInformation(meetingInformation);
+
+    // mailHandler(guests, subject, newMeetingInfo);
+    debug('Information: ', dataSnapshot.val());
+  }, function (err) {
+    debug('Error connecting to Firebase', err);
+  });
 }
 
-function getMeetingGuests() {
+function getMeetingGuests(meetingInformation) {
   // TODO: Implement function
   return "fachinacg@gmail.com";
 }
 
-function getMeetingTitle() {
+function getMeetingTitle(meetingInformation) {
   // TODO: Implement function
   return "Subject of the meeting";
 }
 
-function getMeetingInformation(meetingId) {
+function getMeetingInformation(meetingInformation) {
   // TODO: Implement function
-  return meetingId;
+  return 'Hi!';
 }
 
 module.exports = { sendInvitationFromMeeting };
