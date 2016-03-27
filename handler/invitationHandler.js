@@ -28,8 +28,7 @@ function getMeetingGuests(meetingInformation) {
 }
 
 function getMeetingHostName(meetingInformation) {
-  const hostName = meetingInformation.guests[0].name;
-  return `${hostName} invitation`;
+  return meetingInformation.guests[0].name;
 }
 
 function getMeetingInformation(meetingInformation, guest, hostName) {
