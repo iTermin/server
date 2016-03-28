@@ -13,6 +13,7 @@ const templateText = fs.readFileSync(path.join(__dirname, '../emailMeeting/email
 const compiled = compile(templateText);
 
 function sendInvitationFromMeeting(meetingId) {
+  // TODO: Extract to configuration file (#5)
   const firebaseRef = new Firebase("https://fiery-fire-7264.firebaseio.com");
   firebaseRef.child(`Meetings/${meetingId}`).once('value', function (dataSnapshot) {
     const meetingInformation = dataSnapshot.val();
