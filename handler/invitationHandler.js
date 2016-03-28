@@ -24,8 +24,8 @@ function sendInvitationFromMeeting(meetingId) {
       const guest = guests[guestIndex];
       debug(`Sending information to the guest: ${guest.name}`);
 
-      const meetingHTML = getMeetingInformation(meetingInformation, guest, hostName);
-      mailHandler(guest.email, subject, meetingHTML);
+      const html = getMeetingInformation(meetingInformation, guest, hostName);
+      mailHandler(guest.email, subject, html);
     }
   }, function (err) {
     debug('Error connecting to Firebase', err);
