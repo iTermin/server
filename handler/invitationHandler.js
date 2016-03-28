@@ -45,7 +45,19 @@ function getMeetingInformation(meetingInformation, guest, hostName) {
   const nameMeeting = meetingInformation.detail.name;
   const guestName = guest.name;
   const durationMeeting = '1 hour';
-  return resolveToString(compiled, { guestName, hostName, dateMeeting, durationMeeting, nameMeeting});
+
+  // TODO: Use real paths to confirm or reject the email (#18)
+  const cancelURL = '#';
+  const confirmURL = '#';
+  return resolveToString(compiled, {
+    guestName,
+    hostName,
+    dateMeeting,
+    durationMeeting,
+    nameMeeting,
+    confirmURL,
+    cancelURL
+  });
 }
 
 module.exports = { sendInvitationFromMeeting };
