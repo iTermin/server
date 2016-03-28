@@ -3,6 +3,10 @@
 const mailHandler = require('./mailHandler');
 const Firebase = require("firebase");
 const debug = require('debug')('ma:handler:invitationHandler');
+const fs = require('fs');
+const path = require('path');
+
+const template = fs.readFileSync(path.join(__dirname, '../emailMeeting/emailToGuest.html'), 'utf-8');
 
 function sendInvitationFromMeeting(meetingId) {
   const firebaseRef = new Firebase("https://fiery-fire-7264.firebaseio.com");
