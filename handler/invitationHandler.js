@@ -1,12 +1,16 @@
 'use strict';
 
-const mailHandler = require('./mailHandler');
+const resolveToString = require('es6-template-strings/resolve-to-string');
+const compile = require("es6-template-strings/compile");
 const Firebase = require("firebase");
 const debug = require('debug')('ma:handler:invitationHandler');
 const fs = require('fs');
 const path = require('path');
 
-const template = fs.readFileSync(path.join(__dirname, '../emailMeeting/emailToGuest.html'), 'utf-8');
+const mailHandler = require('./mailHandler');
+
+const templateText = fs.readFileSync(path.join(__dirname, '../emailMeeting/emailToGuest.html'), 'utf-8');
+const compiled = compile(templateText);
 
 function sendInvitationFromMeeting(meetingId) {
   const firebaseRef = new Firebase("https://fiery-fire-7264.firebaseio.com");
@@ -37,9 +41,11 @@ function getMeetingHostName(meetingInformation) {
 
 function getMeetingInformation(meetingInformation, guest, hostName) {
   // TODO: Use template (#8)
-  const meetingTime = meetingInformation.detail.startDate;
+  const dateMeeting = meetingInformation.detail.startDate;
+  const nameMeeting = meetingInformation.detail.name;
   const guestName = guest.name;
-  return `<html><body><p>Hi ${guestName} you have been invited to the ${hostName}'s meeting at: ${meetingTime}</p></body></html>`;
+  const durationMeeting = '1 hour';
+  return resolveToString(compiled, { guestName, hostName, dateMeeting, durationMeeting, nameMeeting});
 }
 
 module.exports = { sendInvitationFromMeeting };
