@@ -1,33 +1,32 @@
-'use strict';
-
 const resolveToString = require('es6-template-strings/resolve-to-string');
-const compile = require("es6-template-strings/compile");
-const Firebase = require("firebase");
+const compile = require('es6-template-strings/compile');
+const Firebase = require('firebase');
 const debug = require('debug')('ma:handler:invitationHandler');
 const fs = require('fs');
 const path = require('path');
 const moment = require('moment');
 const mailHandler = require('./mailHandler');
+const nconf = require('nconf');
 
-const templateText = fs.readFileSync(path.join(__dirname, '../emailMeeting/emailToGuest.html'), 'utf-8');
+const filePath = path.join(__dirname, '../emailMeeting/emailToGuest.html');
+const templateText = fs.readFileSync(filePath, 'utf-8');
 const compiled = compile(templateText);
 
 function sendInvitationFromMeeting(meetingId) {
-  // TODO: Extract to configuration file (#5)
-  const firebaseRef = new Firebase("https://fiery-fire-7264.firebaseio.com");
-  firebaseRef.child(`Meetings/${meetingId}`).once('value', function (dataSnapshot) {
+  const firebaseRef = new Firebase(nconf.get('FIREBASE_PATH'));
+  firebaseRef.child(`Meetings/${meetingId}`).once('value', (dataSnapshot) => {
     const meetingInformation = dataSnapshot.val();
     const hostName = getMeetingHostName(meetingInformation);
     const subject = `${hostName}'s invitation`;
     const guests = getMeetingGuests(meetingInformation);
-    for(let guestIndex = 1; guestIndex < guests.length; ++guestIndex) {
+    for (let guestIndex = 1; guestIndex < guests.length; ++guestIndex) {
       const guest = guests[guestIndex];
       debug(`Sending information to the guest: ${guest.name}`);
 
       const html = getMeetingInformation(meetingInformation, guest, hostName);
       mailHandler(guest.email, subject, html);
     }
-  }, function (err) {
+  }, (err) => {
     debug('Error connecting to Firebase', err);
   });
 }
@@ -41,9 +40,8 @@ function getMeetingHostName(meetingInformation) {
 }
 
 function getMeetingInformation(meetingInformation, guest, hostName) {
-  // TODO: Use template (#8)
-  const startDate = moment(meetingInformation.detail.startDate, "DD-MM-YYYY HH:MM:SS Z");
-  const endDate = moment(meetingInformation.detail.endDate, "DD-MM-YYYY HH:MM:SS Z");
+  const startDate = moment(meetingInformation.detail.startDate, 'DD-MM-YYYY HH:MM:SS Z');
+  const endDate = moment(meetingInformation.detail.endDate, 'DD-MM-YYYY HH:MM:SS Z');
 
   const dateMeeting = startDate.format('LLLL');
   const nameMeeting = meetingInformation.detail.name;
@@ -60,7 +58,7 @@ function getMeetingInformation(meetingInformation, guest, hostName) {
     durationMeeting,
     nameMeeting,
     confirmURL,
-    cancelURL
+    cancelURL,
   });
 }
 

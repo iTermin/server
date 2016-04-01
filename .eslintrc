@@ -1,6 +1,12 @@
 {
   "extends": "airbnb",
+  "parser" : "babel-eslint",
+  "env": {
+    node: true,
+    es6: true
+  },
   "rules" : {
-    "new-cap" : 0
+    "new-cap" : 0,
+    "no-use-before-define" : ["error", {"functions": false}]
   }
 }
