@@ -1,13 +1,12 @@
 
 const mailgun = require('mailgun-js');
 const debug = require('debug')('ma:handler:mailHandler');
+const nconf = require('nconf');
 
 async function mailHandler(to, subject, html) {
-  // TODO: Implement RC https://github.com/dominictarr/rc (#5)
-  const apiKey = 'key-cf0bacb060ebc876c47bd242dc3b6496';
-  const domain = 'sandbox0a454306817b460580ad9763ee18256b.mailgun.org';
-  const from = 'Mailgun Sandbox <postmaster@sandbox0a454306817b460580ad9763ee18256b.mailgun.org>';
-
+  const apiKey = nconf.get('MAILGUN_APIKEY');
+  const domain = nconf.get('MAILGUN_DOMAIN');
+  const from = nconf.get('MAILGUN_FROM');
 
   const client = mailgun({ apiKey, domain });
   const data = { from, to, subject, html };
