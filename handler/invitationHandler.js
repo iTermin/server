@@ -6,9 +6,10 @@ const Firebase = require("firebase");
 const debug = require('debug')('ma:handler:invitationHandler');
 const fs = require('fs');
 const path = require('path');
-
+const moment = require('moment');
 const mailHandler = require('./mailHandler');
 
+moment.locale('es');
 const templateText = fs.readFileSync(path.join(__dirname, '../emailMeeting/emailToGuest.html'), 'utf-8');
 const compiled = compile(templateText);
 
@@ -42,12 +43,13 @@ function getMeetingHostName(meetingInformation) {
 
 function getMeetingInformation(meetingInformation, guest, hostName) {
   // TODO: Use template (#8)
-  const dateMeeting = meetingInformation.detail.startDate;
+  const startDate = moment(meetingInformation.detail.startDate, "DD-MM-YYYY HH:MM:SS Z");
+  const endDate = moment(meetingInformation.detail.endDate, "DD-MM-YYYY HH:MM:SS Z");
+
+  const dateMeeting = startDate.format('LLLL');
   const nameMeeting = meetingInformation.detail.name;
   const guestName = guest.name;
-
-  // TODO: Fix time (#20)
-  const durationMeeting = '1 hour';
+  const durationMeeting = startDate.from(endDate, true);
 
   // TODO: Use real paths to confirm or reject the email (#18)
   const cancelURL = '#';
