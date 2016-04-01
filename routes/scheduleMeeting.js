@@ -20,6 +20,7 @@ route.post('/', async (req, res) => {
   const newMeetingInfo = req.body.meetingId;
   if (newMeetingInfo) {
     currentMeetings.push(newMeetingInfo);
+    // TODO: Handle exceptions
     await invitationHandler.sendInvitationFromMeeting(newMeetingInfo);
     res.json({
       id: currentMeetings.length,
@@ -32,6 +33,8 @@ route.post('/', async (req, res) => {
     });
   }
 });
+
+// TODO: Remove unnecesary methods
 
 /**
  * Once the meeting is updated, it sends the invitation to all the guests

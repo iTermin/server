@@ -16,13 +16,13 @@ route.get('/:meetingId/:index', async (req, res, next) => {
   const index = req.params.index;
 
   try {
-    const meetingGeneralInfo = await meetingHandler.getMeetingDetail(meetingId)
+    const meetingGeneralInfo = await meetingHandler.getMeetingDetail(meetingId);
     const meetingDetail = meetingGeneralInfo.guests[index].meetingDetail;
 
     debug('Rendering page of meeting:', meetingId, index);
     const info = { ...meetingGeneralInfo, meetingDetail, index };
     res.render('answerGuest', info);
-  } catch(err) {
+  } catch (err) {
     next(err);
   }
 });
