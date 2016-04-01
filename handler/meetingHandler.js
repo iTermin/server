@@ -1,5 +1,3 @@
-const resolveToString = require('es6-template-strings/resolve-to-string');
-const compile = require('es6-template-strings/compile');
 const Firebase = require('firebase');
 const debug = require('debug')('ma:handler:meetingHandler');
 const moment = require('moment');
@@ -10,16 +8,20 @@ function getMeetingDetail(meetingId) {
     const firebaseRef = new Firebase(nconf.get('FIREBASE_PATH'));
     firebaseRef.child(`Meetings/${meetingId}`).once('value', (dataSnapshot) => {
       const meetingInformation = dataSnapshot.val();
-      if(!meetingInformation) return reject('Invalid meeting');
+      if (meetingInformation) {
+        debug('Extracted information from meetingId', meetingId);
 
-      const hostName = getMeetingHostName(meetingInformation);
-      const subject = `${hostName}'s invitation`;
-      const guests = getMeetingGuests(meetingInformation);
-      for (let guestIndex = 1; guestIndex < guests.length; ++guestIndex) {
-        const guest = guests[guestIndex];
-        guest.meetingDetail = getGuestMeetingInformation(meetingInformation, guest, hostName);
+        const hostName = getMeetingHostName(meetingInformation);
+        const subject = `${hostName}'s invitation`;
+        const guests = getMeetingGuests(meetingInformation);
+        for (let guestIndex = 1; guestIndex < guests.length; ++guestIndex) {
+          const guest = guests[guestIndex];
+          guest.meetingDetail = getGuestMeetingInformation(meetingInformation, guest, hostName);
+        }
+        resolve({ meetingInformation, hostName, subject, guests });
+      } else {
+        reject('Invalid meeting');
       }
-      resolve({ meetingInformation, hostName, subject, guests, subject });
     }, (err) => {
       reject(err);
     });

@@ -11,15 +11,20 @@ route.use((req, res, next) => {
 });
 
 
-route.get('/:meetingId/:index', async (req, res) => {
+route.get('/:meetingId/:index', async (req, res, next) => {
   const meetingId = req.params.meetingId;
   const index = req.params.index;
-  const meetingGeneralInfo = await meetingHandler.getMeetingDetail(meetingId)
-  const meetingDetail = meetingGeneralInfo.guests[index].meetingDetail;
 
-  debug('Rendering page of meeting:', meetingId, index);
-  const info = { ...meetingGeneralInfo, meetingDetail, index };
-  res.render('answerGuest', info);
+  try {
+    const meetingGeneralInfo = await meetingHandler.getMeetingDetail(meetingId)
+    const meetingDetail = meetingGeneralInfo.guests[index].meetingDetail;
+
+    debug('Rendering page of meeting:', meetingId, index);
+    const info = { ...meetingGeneralInfo, meetingDetail, index };
+    res.render('answerGuest', info);
+  } catch(err) {
+    next(err);
+  }
 });
 
 module.exports = route;
