@@ -19,7 +19,6 @@ route.get('/:meetingId/:index', async (req, res) => {
 
   debug('Rendering page of meeting:', meetingId, index);
   const info = { ...meetingGeneralInfo, meetingDetail, index };
-  debug('Info:', info);
   res.render('answerGuest', info);
 });
 
