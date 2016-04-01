@@ -1,3 +1,6 @@
+require("babel-polyfill");
+require('es6-promise').polyfill();
+
 const express = require('express');
 const debug = require('debug')('ma:index');
 const bodyParser = require('body-parser');
