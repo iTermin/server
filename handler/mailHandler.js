@@ -11,7 +11,7 @@ async function mailHandler(to, subject, html) {
   const client = mailgun({ apiKey, domain });
   const data = { from, to, subject, html };
 
-  debug('Sending email: ', data);
+  debug('Sending email: ', { to, from, subject });
   try {
     const response = await client.messages().send(data);
     debug('Sent message with response: ', response);
