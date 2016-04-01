@@ -16,8 +16,10 @@
   "license": "ISC",
   "homepage": "https://bitbucket.org/fachinota/servermeetingapp#readme",
   "dependencies": {
+    "babel": "^6.5.2",
     "babel-cli": "^6.4.5",
     "babel-core": "^6.4.5",
+    "babel-eslint": "^6.0.2",
     "babel-loader": "^6.2.2",
     "babel-plugin-syntax-async-functions": "^6.5.0",
     "babel-plugin-transform-regenerator": "^6.6.5",

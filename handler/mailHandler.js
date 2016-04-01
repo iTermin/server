@@ -16,9 +16,8 @@ async function mailHandler(to, subject, html) {
   try {
     const response = await client.messages().send(data);
     debug('Sent message with response: ', response);
-    
-  } catch(error) {
-    debug('Error sending message: ', error)
+  } catch (error) {
+    debug('Error sending message: ', error);
   }
 }
 
