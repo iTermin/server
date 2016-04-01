@@ -41,7 +41,7 @@ route.put('/', (req, res) => {
   const newMeetingInfo = req.body.meetingId;
 
   const indexOfMeeting = currentMeetings.indexOf(newMeetingInfo);
-  if (newMeetingInfo && indexOfMeeting >= 0 ) {
+  if (newMeetingInfo && indexOfMeeting >= 0) {
     invitationHandler.sendInvitationFromMeeting(newMeetingInfo);
     res.json({
       id: indexOfMeeting,

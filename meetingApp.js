@@ -9,7 +9,7 @@ const bodyParser = require('body-parser');
 const scheduleMeeting = require('./routes/scheduleMeeting');
 
 nconf.argv().env();
-nconf.defaults({ PORT: 3000, FIREBASE_PATH: 'https://fiery-fire-7264.firebaseio.com'});
+nconf.defaults({ PORT: 3000, FIREBASE_PATH: 'https://fiery-fire-7264.firebaseio.com' });
 
 const port = nconf.get('PORT');
 
