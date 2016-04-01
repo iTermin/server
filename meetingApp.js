@@ -1,4 +1,4 @@
-require("babel-polyfill");
+require('babel-polyfill');
 require('es6-promise').polyfill();
 
 const nconf = require('nconf');
@@ -9,9 +9,9 @@ const bodyParser = require('body-parser');
 const scheduleMeeting = require('./routes/scheduleMeeting');
 
 nconf.argv().env();
-nconf.defaults({ PORT: 3000 });
+nconf.defaults({ PORT: 3000, FIREBASE_PATH: 'https://fiery-fire-7264.firebaseio.com'});
 
-const port = nconf.get("PORT");
+const port = nconf.get('PORT');
 
 const meetingApp = express();
 meetingApp.use(bodyParser.json());

@@ -8,13 +8,13 @@ const fs = require('fs');
 const path = require('path');
 const moment = require('moment');
 const mailHandler = require('./mailHandler');
+const nconf = require('nconf');
 
 const templateText = fs.readFileSync(path.join(__dirname, '../emailMeeting/emailToGuest.html'), 'utf-8');
 const compiled = compile(templateText);
 
 function sendInvitationFromMeeting(meetingId) {
-  // TODO: Extract to configuration file (#5)
-  const firebaseRef = new Firebase("https://fiery-fire-7264.firebaseio.com");
+  const firebaseRef = new Firebase(nconf.get('FIREBASE_PATH'));
   firebaseRef.child(`Meetings/${meetingId}`).once('value', function (dataSnapshot) {
     const meetingInformation = dataSnapshot.val();
     const hostName = getMeetingHostName(meetingInformation);
@@ -41,7 +41,6 @@ function getMeetingHostName(meetingInformation) {
 }
 
 function getMeetingInformation(meetingInformation, guest, hostName) {
-  // TODO: Use template (#8)
   const startDate = moment(meetingInformation.detail.startDate, "DD-MM-YYYY HH:MM:SS Z");
   const endDate = moment(meetingInformation.detail.endDate, "DD-MM-YYYY HH:MM:SS Z");
 
