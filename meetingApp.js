@@ -14,6 +14,7 @@ nconf.argv().env().file(filePath);
 const port = nconf.get('PORT');
 
 const meetingApp = express();
+meetingApp.set('view engine', 'ejs');
 meetingApp.use(bodyParser.json());
 meetingApp.use(bodyParser.urlencoded());
 meetingApp.use('/meeting', scheduleMeeting);
