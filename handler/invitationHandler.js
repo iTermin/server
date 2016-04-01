@@ -11,8 +11,8 @@ const templateText = fs.readFileSync(filePath, 'utf-8');
 const compiled = compile(templateText);
 
 async function sendInvitationFromMeeting(meetingId) {
-  const meetingGeneralInfo = await meetingHandler.getMeetingDetail(meetingId)
-  const { meetingInformation, hostName, subject, guests } = meetingGeneralInfo;
+  const meetingGeneralInfo = await meetingHandler.getMeetingDetail(meetingId);
+  const { subject, guests } = meetingGeneralInfo;
   for (let guestIndex = 1; guestIndex < guests.length; ++guestIndex) {
     const guest = guests[guestIndex];
     debug(`Sending information to the guest: ${guest.name}`);
