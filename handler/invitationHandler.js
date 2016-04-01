@@ -17,7 +17,9 @@ async function sendInvitationFromMeeting(meetingId) {
     const guest = guests[guestIndex];
     debug(`Sending information to the guest: ${guest.name}`);
 
-    const html = resolveToString(compiled, guest.meetingDetail);
+    // TODO: Send the real host URL for the image (#23)
+    const hostName = '';
+    const html = resolveToString(compiled, { ...guest.meetingDetail, hostName });
     mailHandler(guest.email, subject, html);
   }
 }
