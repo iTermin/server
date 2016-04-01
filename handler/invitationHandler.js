@@ -10,18 +10,16 @@ const filePath = path.join(__dirname, '../public/emailToGuest.html');
 const templateText = fs.readFileSync(filePath, 'utf-8');
 const compiled = compile(templateText);
 
-function sendInvitationFromMeeting(meetingId) {
-  meetingHandler.getMeetingDetail(meetingId)
-  .then((meetingGeneralInfo) => {
-    const { meetingInformation, hostName, subject, guests } = meetingGeneralInfo;
-    for (let guestIndex = 1; guestIndex < guests.length; ++guestIndex) {
-      const guest = guests[guestIndex];
-      debug(`Sending information to the guest: ${guest.name}`);
+async function sendInvitationFromMeeting(meetingId) {
+  const meetingGeneralInfo = await meetingHandler.getMeetingDetail(meetingId)
+  const { meetingInformation, hostName, subject, guests } = meetingGeneralInfo;
+  for (let guestIndex = 1; guestIndex < guests.length; ++guestIndex) {
+    const guest = guests[guestIndex];
+    debug(`Sending information to the guest: ${guest.name}`);
 
-      const html = resolveToString(compiled, guest.meetingDetail);
-      mailHandler(guest.email, subject, html);
-    }
-  }).catch((err) => debug('Error sending invitations', err));
+    const html = resolveToString(compiled, guest.meetingDetail);
+    mailHandler(guest.email, subject, html);
+  }
 }
 
 module.exports = { sendInvitationFromMeeting };

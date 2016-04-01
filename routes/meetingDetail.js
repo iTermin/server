@@ -11,13 +11,10 @@ route.use((req, res, next) => {
 });
 
 
-route.get('/:meetingId', (req, res, next) => {
+route.get('/:meetingId', async (req, res) => {
   const meetingId = req.params.meetingId;
-  const meetingGeneralInfo = meetingHandler.getMeetingDetail(meetingId)
-  .then((meetingGeneralInfo) => {
-    debug("MeetingGeneralInfo", meetingGeneralInfo);
-    res.render('answerGuest', meetingGeneralInfo);
-  }).catch((err) => next(err));
+  const meetingGeneralInfo = await meetingHandler.getMeetingDetail(meetingId)
+  res.render('answerGuest', meetingGeneralInfo);
 });
 
 module.exports = route;
