@@ -9,7 +9,6 @@ const path = require('path');
 const moment = require('moment');
 const mailHandler = require('./mailHandler');
 
-moment.locale('es');
 const templateText = fs.readFileSync(path.join(__dirname, '../emailMeeting/emailToGuest.html'), 'utf-8');
 const compiled = compile(templateText);
 
