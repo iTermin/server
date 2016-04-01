@@ -16,11 +16,12 @@ route.use((req, res, next) => {
  * Create a new meeting into the system, sending the invitation to all the guests
  * @param meetingId Id of the crated meeting for a given user
  * */
-route.post('/', (req, res) => {
+route.post('/', async (req, res) => {
   const newMeetingInfo = req.body.meetingId;
   if (newMeetingInfo) {
     currentMeetings.push(newMeetingInfo);
-    invitationHandler.sendInvitationFromMeeting(newMeetingInfo);
+    // TODO: Handle exceptions
+    await invitationHandler.sendInvitationFromMeeting(newMeetingInfo);
     res.json({
       id: currentMeetings.length,
       message: 'Handling new meeting',
@@ -33,16 +34,18 @@ route.post('/', (req, res) => {
   }
 });
 
+// TODO: Remove unnecesary methods
+
 /**
  * Once the meeting is updated, it sends the invitation to all the guests
  * @param meetingId Id of the crated meeting for a given user
  * */
-route.put('/', (req, res) => {
+route.put('/', async (req, res) => {
   const newMeetingInfo = req.body.meetingId;
 
   const indexOfMeeting = currentMeetings.indexOf(newMeetingInfo);
   if (newMeetingInfo && indexOfMeeting >= 0) {
-    invitationHandler.sendInvitationFromMeeting(newMeetingInfo);
+    await invitationHandler.sendInvitationFromMeeting(newMeetingInfo);
     res.json({
       id: indexOfMeeting,
       message: 'Updated new meeting',
