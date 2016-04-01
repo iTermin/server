@@ -45,6 +45,8 @@ function getMeetingInformation(meetingInformation, guest, hostName) {
   const dateMeeting = meetingInformation.detail.startDate;
   const nameMeeting = meetingInformation.detail.name;
   const guestName = guest.name;
+
+  // TODO: Fix time (#20)
   const durationMeeting = '1 hour';
 
   // TODO: Use real paths to confirm or reject the email (#18)
