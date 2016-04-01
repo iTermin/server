@@ -1,8 +1,8 @@
 'use strict';
 
 const resolveToString = require('es6-template-strings/resolve-to-string');
-const compile = require("es6-template-strings/compile");
-const Firebase = require("firebase");
+const compile = require('es6-template-strings/compile');
+const Firebase = require('firebase');
 const debug = require('debug')('ma:handler:invitationHandler');
 const fs = require('fs');
 const path = require('path');
@@ -41,8 +41,8 @@ function getMeetingHostName(meetingInformation) {
 }
 
 function getMeetingInformation(meetingInformation, guest, hostName) {
-  const startDate = moment(meetingInformation.detail.startDate, "DD-MM-YYYY HH:MM:SS Z");
-  const endDate = moment(meetingInformation.detail.endDate, "DD-MM-YYYY HH:MM:SS Z");
+  const startDate = moment(meetingInformation.detail.startDate, 'DD-MM-YYYY HH:MM:SS Z');
+  const endDate = moment(meetingInformation.detail.endDate, 'DD-MM-YYYY HH:MM:SS Z');
 
   const dateMeeting = startDate.format('LLLL');
   const nameMeeting = meetingInformation.detail.name;
