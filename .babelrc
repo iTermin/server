@@ -1,7 +1,9 @@
 {
   "presets": ["es2015", "stage-0"],
   "plugins": [
-    "babel-polyfill"
+    "babel-polyfill",
+    "syntax-async-functions",
+    "transform-regenerator"
   ]
 }
 
