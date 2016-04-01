@@ -5,18 +5,12 @@ const nconf = require('nconf');
 const express = require('express');
 const debug = require('debug')('ma:index');
 const bodyParser = require('body-parser');
+const path = require('path');
 
 const scheduleMeeting = require('./routes/scheduleMeeting');
 
-nconf.argv().env();
-nconf.defaults({
-  PORT: 3000,
-  FIREBASE_PATH: 'https://fiery-fire-7264.firebaseio.com',
-  MAILGUN_APPKEY: 'key-cf0bacb060ebc876c47bd242dc3b6496',
-  MAILGUN_DOMAIN: 'sandbox0a454306817b460580ad9763ee18256b.mailgun.org',
-  MAILGUN_FROM: 'Mailgun Sandbox <postmaster@sandbox0a454306817b460580ad9763ee18256b.mailgun.org>',
-});
-
+const filePath = path.join(__dirname, 'config.json');
+nconf.argv().env().file(filePath);
 const port = nconf.get('PORT');
 
 const meetingApp = express();
