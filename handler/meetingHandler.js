@@ -15,11 +15,27 @@ function getMeetingDetail(meetingId) {
         const hostName = getMeetingHostName(meetingInformation);
         const subject = `${hostName}'s invitation`;
         const guests = getMeetingGuests(meetingInformation);
+
+        // TODO: Use this information instead of the guets (#21)
+        const startDate = moment(meetingInformation.detail.startDate, 'DD-MM-YYYY HH:MM:SS Z');
+        const endDate = moment(meetingInformation.detail.endDate, 'DD-MM-YYYY HH:MM:SS Z');
+        const dateMeeting = startDate.format('LLLL');
+        const nameMeeting = meetingInformation.detail.name;
+        const durationMeeting = startDate.from(endDate, true);
+
+        const formattedDetails = {
+          startDate,
+          endDate,
+          dateMeeting,
+          nameMeeting,
+          durationMeeting
+        };
+
         for (let guestIndex = 1; guestIndex < guests.length; ++guestIndex) {
           const guest = guests[guestIndex];
           guest.meetingDetail = getGuestMeetingInformation(meetingInformation, guest, hostName);
         }
-        resolve({ meetingInformation, hostName, subject, guests });
+        resolve({ meetingInformation, hostName, subject, guests, formattedDetails });
       } else {
         reject('Invalid meeting');
       }

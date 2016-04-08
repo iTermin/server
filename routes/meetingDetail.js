@@ -17,7 +17,7 @@ route.get('/:meetingId/:index', async (req, res, next) => {
   const status = Number(req.query.status) || 0;
 
   try {
-    debug('Using the status:', status);
+    debug('Updating the status:', status);
     await meetingHandler.updateStatusForGuest(meetingId, index, status);
     const meetingGeneralInfo = await meetingHandler.getMeetingDetail(meetingId);
     const meetingDetail = meetingGeneralInfo.guests[index].meetingDetail;
@@ -25,6 +25,19 @@ route.get('/:meetingId/:index', async (req, res, next) => {
     debug('Rendering page of meeting:', meetingId, index);
     const info = { ...meetingGeneralInfo, meetingDetail, index };
     res.render('answerGuest', info);
+  } catch (err) {
+    next(err);
+  }
+});
+
+route.get('/:meetingId', async (req, res, next) => {
+  const meetingId = req.params.meetingId;
+
+  try {
+    const meetingGeneralInfo = await meetingHandler.getMeetingDetail(meetingId);
+
+    debug('Rendering page of meeting:', meetingId);
+    res.render('meetingPreview', meetingGeneralInfo);
   } catch (err) {
     next(err);
   }
