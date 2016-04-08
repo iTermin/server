@@ -391,7 +391,7 @@ Sizes: [
                                             <table>
                                             <% for(var guestIndex = 0; guestIndex < guests.length; guestIndex++) { %> 
                                              <tr>
-                                              <td><%- guests[guestIndex].status %></td>
+                                              <td><%- guests[guestIndex].status ? (guests[guestIndex].status === 1 ? '✅' : '🚫' ) : '❓' %></td>
                                               <td><%- guests[guestIndex].name %></td>
                                              </tr>
                                             <% } %> 
