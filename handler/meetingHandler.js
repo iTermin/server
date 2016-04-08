@@ -4,6 +4,7 @@ const moment = require('moment');
 const nconf = require('nconf');
 
 function getMeetingDetail(meetingId) {
+  // TODO: Improve the usage of the promises
   return new Promise((resolve, reject) => {
     const firebaseRef = new Firebase(nconf.get('FIREBASE_PATH'));
     firebaseRef.child(`Meetings/${meetingId}`).once('value', (dataSnapshot) => {
@@ -26,6 +27,11 @@ function getMeetingDetail(meetingId) {
       reject(err);
     });
   });
+}
+
+function updateStatusForGuest(meetingId, index, status) {
+  const firebaseRef = new Firebase(nconf.get('FIREBASE_PATH'));
+  return firebaseRef.child(`Meetings/${meetingId}/guests/${index}/`).update({ status });
 }
 
 function getMeetingGuests(meetingInformation) {
@@ -58,4 +64,4 @@ function getGuestMeetingInformation(meetingInformation, guest, hostName) {
   };
 }
 
-module.exports = { getMeetingDetail };
+module.exports = { getMeetingDetail, updateStatusForGuest };
