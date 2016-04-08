@@ -10,6 +10,8 @@ const filePath = path.join(__dirname, '../public/emailToGuest.html');
 const templateText = fs.readFileSync(filePath, 'utf-8');
 const compiled = compile(templateText);
 
+const nconf = require('nconf');
+
 async function sendInvitationFromMeeting(meetingId) {
   const meetingGeneralInfo = await meetingHandler.getMeetingDetail(meetingId);
   const { subject, guests } = meetingGeneralInfo;
@@ -17,9 +19,8 @@ async function sendInvitationFromMeeting(meetingId) {
     const guest = guests[guestIndex];
     debug(`Sending information to the guest: ${guest.name}`);
 
-    // TODO: Send the real host URL for the image (#23)
-    const hostName = '';
-    const html = resolveToString(compiled, { ...guest.meetingDetail, hostName });
+    const baseURI = nconf.get('BASE_URI');
+    const html = resolveToString(compiled, { ...guest.meetingDetail, baseURI });
     mailHandler(guest.email, subject, html);
   }
 }
