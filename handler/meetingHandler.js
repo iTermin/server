@@ -28,7 +28,7 @@ function getMeetingDetail(meetingId) {
           endDate,
           dateMeeting,
           nameMeeting,
-          durationMeeting
+          durationMeeting,
         };
 
         for (let guestIndex = 1; guestIndex < guests.length; ++guestIndex) {
