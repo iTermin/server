@@ -19,7 +19,8 @@ async function sendInvitationFromMeeting(meetingId) {
     debug(`Sending information to the guest: ${guest.name}`);
 
     const baseURI = nconf.get('BASE_URI');
-    const html = resolveToString(compiled, { ...guest.meetingDetail, baseURI });
+    const meetingURL = `${baseURI}/meetingDetail/${meetingId}/${guestIndex}`;
+    const html = resolveToString(compiled, { ...guest.meetingDetail, baseURI, meetingURL });
     mailHandler(guest.email, subject, html);
   }
 }

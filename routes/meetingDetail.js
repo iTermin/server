@@ -14,8 +14,11 @@ route.use((req, res, next) => {
 route.get('/:meetingId/:index', async (req, res, next) => {
   const meetingId = req.params.meetingId;
   const index = req.params.index;
+  const status = Number(req.query.status) || 0;
 
   try {
+    debug('Using the status:', status);
+    await meetingHandler.updateStatusForGuest(meetingId, index, status);
     const meetingGeneralInfo = await meetingHandler.getMeetingDetail(meetingId);
     const meetingDetail = meetingGeneralInfo.guests[index].meetingDetail;
 
