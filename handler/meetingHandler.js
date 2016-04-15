@@ -9,37 +9,36 @@ async function getMeetingDetail(meetingId) {
  const firebaseRef = new Firebase(nconf.get('FIREBASE_PATH'));
  const dataSnapshot = await firebaseRef.child(`Meetings/${meetingId}`).once('value');
  const meetingInformation = dataSnapshot.val();
+
  if(!meetingInformation) throw new Error('Invalid meeting');
- if (meetingInformation) {
-  debug('Extracted information from meetingId', meetingId);
 
-  const hostName = getMeetingHostName(meetingInformation);
-  const subject = `${hostName}'s invitation`;
-  const guests = getMeetingGuests(meetingInformation);
+ debug('Extracted information from meetingId', meetingId);
 
-  // TODO: Use this information instead of the guets (#21)
-  const startDate = moment(meetingInformation.detail.startDate, dateFormat);
-  const endDate = moment(meetingInformation.detail.endDate, dateFormat);
-  const dateMeeting = startDate.format('LLLL');
-  const nameMeeting = meetingInformation.detail.name;
-  const durationMeeting = startDate.from(endDate, true);
+ const hostName = getMeetingHostName(meetingInformation);
+ const subject = `${hostName}'s invitation`;
+ const guests = getMeetingGuests(meetingInformation);
 
-  const formattedDetails = {
-   startDate,
-   endDate,
-   dateMeeting,
-   nameMeeting,
-   durationMeeting,
-  };
+ // TODO: Use this information instead of the guets (#21)
+ const startDate = moment(meetingInformation.detail.startDate, dateFormat);
+ const endDate = moment(meetingInformation.detail.endDate, dateFormat);
+ const dateMeeting = startDate.format('LLLL');
+ const nameMeeting = meetingInformation.detail.name;
+ const durationMeeting = startDate.from(endDate, true);
 
-  for (let guestIndex = 1; guestIndex < guests.length; ++guestIndex) {
-   const guest = guests[guestIndex];
-   guest.meetingDetail = getGuestMeetingInformation(meetingInformation, guest, hostName);
-  }
-  return { meetingInformation, hostName, subject, guests, formattedDetails };
- } else {
-  reject('Invalid meeting');
+ const formattedDetails = {
+  startDate,
+  endDate,
+  dateMeeting,
+  nameMeeting,
+  durationMeeting,
+ };
+
+ for (let guestIndex = 1; guestIndex < guests.length; ++guestIndex) {
+  const guest = guests[guestIndex];
+  guest.meetingDetail = getGuestMeetingInformation(meetingInformation, guest, hostName);
  }
+
+ return { meetingInformation, hostName, subject, guests, formattedDetails };
 }
 
 function updateStatusForGuest(meetingId, index, status) {
