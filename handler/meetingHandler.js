@@ -63,16 +63,12 @@ function getGuestMeetingInformation(meetingInformation, guest, hostName) {
   const guestName = guest.name;
   const durationMeeting = startDate.from(endDate, true);
 
-  const cancelURL = '#';
-  const confirmURL = '#';
   return {
     guestName,
     hostName,
     dateMeeting,
     durationMeeting,
     nameMeeting,
-    confirmURL,
-    cancelURL,
   };
 }
 
