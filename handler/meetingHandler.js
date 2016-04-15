@@ -18,7 +18,6 @@ async function getMeetingDetail(meetingId) {
   const subject = `${hostName}'s invitation`;
   const guests = getMeetingGuests(meetingInformation);
 
-  // TODO: Use this information instead of the guets (#21)
   const startDate = moment(meetingInformation.detail.startDate, dateFormat);
   const endDate = moment(meetingInformation.detail.endDate, dateFormat);
   const dateMeeting = startDate.format('LLLL');
@@ -35,7 +34,7 @@ async function getMeetingDetail(meetingId) {
 
   for (let guestIndex = 1; guestIndex < guests.length; ++guestIndex) {
     const guest = guests[guestIndex];
-    guest.meetingDetail = getGuestMeetingInformation(meetingInformation, guest, hostName);
+    guest.meetingDetail = getGuestMeetingInformation(meetingInformation, guest);
   }
 
   return { meetingInformation, hostName, subject, guests, formattedDetails };
@@ -54,21 +53,11 @@ function getMeetingHostName(meetingInformation) {
   return meetingInformation.guests[0].name;
 }
 
-function getGuestMeetingInformation(meetingInformation, guest, hostName) {
-  const startDate = moment(meetingInformation.detail.startDate, dateFormat);
-  const endDate = moment(meetingInformation.detail.endDate, dateFormat);
-
-  const dateMeeting = startDate.format('LLLL');
-  const nameMeeting = meetingInformation.detail.name;
+function getGuestMeetingInformation(meetingInformation, guest) {
   const guestName = guest.name;
-  const durationMeeting = startDate.from(endDate, true);
 
   return {
     guestName,
-    hostName,
-    dateMeeting,
-    durationMeeting,
-    nameMeeting,
   };
 }
 

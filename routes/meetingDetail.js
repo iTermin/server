@@ -37,7 +37,7 @@ route.get('/:meetingId', async (req, res, next) => {
     const meetingGeneralInfo = await meetingHandler.getMeetingDetail(meetingId);
 
     debug('Rendering page of meeting:', meetingId);
-    res.render('meetingPreview', meetingGeneralInfo);
+    res.render('meetingPreview', { ...meetingGeneralInfo });
   } catch (err) {
     next(err);
   }
