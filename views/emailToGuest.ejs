@@ -260,7 +260,7 @@ Sizes: [
                                       <tr>
                                         <td align="center" class="textContent">
                                           <!-- CONTENT // -->
-                                          <img width="75%" src="${baseURI}/images/app_logo.png">
+                                          <img width="75%" src="<%- baseURI %>/images/app_logo.png">
                                         </td>
                                       </tr>
                                     </table>
@@ -327,9 +327,9 @@ Sizes: [
                               <table border="0" cellpadding="30" cellspacing="0" width="100%">
                                 <tr>
                                   <td align="center" valign="top" class="textContent">
-                                    <h1 style="color:#FFFFFF;line-height:100%;font-family:Helvetica,Arial,sans-serif;font-size:30px;font-weight:normal;margin-bottom:5px;text-align:center;">Hi ${guestName}!</h1>
-                                    <h2 style="text-align:center;font-weight:normal;font-family:Helvetica,Arial,sans-serif;font-size:20px;margin-bottom:10px;color:#FFFFFF;line-height:135%;">You have been invited to the ${hostName}'s meeting.</h2>
-                                    <img width="70%" src="${baseURI}/images/meeting.png">
+                                    <h1 style="color:#FFFFFF;line-height:100%;font-family:Helvetica,Arial,sans-serif;font-size:30px;font-weight:normal;margin-bottom:5px;text-align:center;">Hi <%- guestName %>!</h1>
+                                    <h2 style="text-align:center;font-weight:normal;font-family:Helvetica,Arial,sans-serif;font-size:20px;margin-bottom:10px;color:#FFFFFF;line-height:135%;">You have been invited to the <%- hostName %>'s meeting.</h2>
+                                    <img width="70%" src="<%- baseURI %>/images/meeting.png">
                                   </td>
                                 </tr>
                               </table>
@@ -373,9 +373,9 @@ Sizes: [
                                         <td align="left" class="textContent">
                                           <h3 style="color:#5F5F5F;line-height:125%;font-family:Helvetica,Arial,sans-serif;font-size:20px;font-weight:normal;margin-top:0;margin-bottom:3px;text-align:left;"><b>Detail Meeting</b></h3>
                                           <div style="text-align:left;font-family:Helvetica,Arial,sans-serif;font-size:15px;margin-bottom:0;color:#5F5F5F;line-height:135%;">
-                                            Name: ${nameMeeting} <br>
-                                            Date: ${dateMeeting} <br>
-                                            Duration: ${durationMeeting} <br>
+                                            Name: <%- nameMeeting %> <br>
+                                            Date: <%- dateMeeting %> <br>
+                                            Duration: <%- durationMeeting %> <br>
                                             <br>
                                           </div>
                                         </td>
@@ -421,7 +421,7 @@ Sizes: [
                                 <tr>
                                   <td align="center" valign="middle" class="buttonContent" style="padding-top:15px;padding-bottom:15px;padding-right:15px;padding-left:15px;">
                                     <a style="color:#FFFFFF;text-decoration:none;font-family:Helvetica,Arial,sans-serif;font-size:20px;line-height:135%;"
-                                                href="${meetingURL}?status=1" 
+                                       href="<%- meetingURL %>?status=1" 
                                      target="_blank">Accept</a>
                                   </td>
                                 </tr>
@@ -446,7 +446,7 @@ Sizes: [
                                 <tr>
                                   <td align="center" valign="middle" class="buttonContent" style="padding-top:15px;padding-bottom:15px;padding-right:15px;padding-left:15px;">
                                     <a style="color:#FFFFFF;text-decoration:none;font-family:Helvetica,Arial,sans-serif;font-size:20px;line-height:135%;"
-                                                href="${meetingURL}?status=2"
+                                       href="<%- meetingURL %>?status=2"
                                      target="_blank">Cancel</a>
                                   </td>
                                 </tr>
