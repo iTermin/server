@@ -6,10 +6,10 @@ const path = require('path');
 const nconf = require('nconf');
 const mailHandler = require('./mailHandler');
 const meetingHandler = require('./meetingHandler');
+const ejs = require('ejs');
 
 const filePath = path.join(__dirname, '../public/emailToGuest.html');
-const templateText = fs.readFileSync(filePath, 'utf-8');
-const compiled = compile(templateText);
+
 
 async function sendInvitationFromMeeting(meetingId) {
   const meetingGeneralInfo = await meetingHandler.getMeetingDetail(meetingId);
@@ -20,8 +20,9 @@ async function sendInvitationFromMeeting(meetingId) {
 
     const baseURI = nconf.get('BASE_URI');
     const meetingURL = `${baseURI}/meetingDetail/${meetingId}/${guestIndex}`;
-    const html = resolveToString(compiled, { ...guest.meetingDetail, baseURI, meetingURL });
-    mailHandler(guest.email, subject, html);
+    ejs.renderFile(filePath, { ...meetingGeneralInfo, ...guest.meetingDetail, baseURI, meetingURL }, (error, html) => {
+      mailHandler(guest.email, subject, html);
+    });
   }
 }
 
