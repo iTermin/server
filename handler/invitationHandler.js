@@ -6,9 +6,6 @@ const ejs = require('ejs');
 const mailHandler = require('./mailHandler');
 const meetingHandler = require('./meetingHandler');
 
-const filePath = path.join(__dirname, '../views/emailToGuest.ejs');
-
-
 async function sendInvitationFromMeeting(meetingId) {
   const meetingGeneralInfo = await meetingHandler.getMeetingDetail(meetingId);
   const { subject, guests } = meetingGeneralInfo;
@@ -18,7 +15,7 @@ async function sendInvitationFromMeeting(meetingId) {
 
     const baseURI = nconf.get('BASE_URI');
     const meetingURL = `${baseURI}/meetingDetail/${meetingId}/${guestIndex}`;
-    ejs.renderFile(filePath, {
+    ejs.renderFile('views/emailToGuest.ejs', {
       ...meetingGeneralInfo,
       ...guest.meetingDetail,
       baseURI, meetingURL,
