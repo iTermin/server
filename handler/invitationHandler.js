@@ -6,7 +6,7 @@ const ejs = require('ejs');
 const mailHandler = require('./mailHandler');
 const meetingHandler = require('./meetingHandler');
 
-const filePath = path.join(__dirname, '../public/emailToGuest.html');
+const filePath = path.join(__dirname, '../views/emailToGuest.ejs');
 
 
 async function sendInvitationFromMeeting(meetingId) {
