@@ -3,6 +3,8 @@ const debug = require('debug')('ma:handler:meetingHandler');
 const moment = require('moment');
 const nconf = require('nconf');
 
+const dateFormat = 'DD-MM-YYYY HH:mm:ss ZZ';
+
 function getMeetingDetail(meetingId) {
   // TODO: Improve the usage of the promises
   return new Promise((resolve, reject) => {
@@ -17,8 +19,8 @@ function getMeetingDetail(meetingId) {
         const guests = getMeetingGuests(meetingInformation);
 
         // TODO: Use this information instead of the guets (#21)
-        const startDate = moment(meetingInformation.detail.startDate, 'DD-MM-YYYY HH:MM:SS Z');
-        const endDate = moment(meetingInformation.detail.endDate, 'DD-MM-YYYY HH:MM:SS Z');
+        const startDate = moment(meetingInformation.detail.startDate, dateFormat);
+        const endDate = moment(meetingInformation.detail.endDate, dateFormat);
         const dateMeeting = startDate.format('LLLL');
         const nameMeeting = meetingInformation.detail.name;
         const durationMeeting = startDate.from(endDate, true);
@@ -59,8 +61,8 @@ function getMeetingHostName(meetingInformation) {
 }
 
 function getGuestMeetingInformation(meetingInformation, guest, hostName) {
-  const startDate = moment(meetingInformation.detail.startDate, 'DD-MM-YYYY HH:MM:SS Z');
-  const endDate = moment(meetingInformation.detail.endDate, 'DD-MM-YYYY HH:MM:SS Z');
+  const startDate = moment(meetingInformation.detail.startDate, dateFormat);
+  const endDate = moment(meetingInformation.detail.endDate, dateFormat);
 
   const dateMeeting = startDate.format('LLLL');
   const nameMeeting = meetingInformation.detail.name;
