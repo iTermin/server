@@ -54,10 +54,8 @@ function getMeetingHostName(meetingInformation) {
 }
 
 function getGuestMeetingInformation(meetingInformation, guest) {
-  const guestName = guest.name;
-
   return {
-    guestName,
+    guestName: guest.name || '',
   };
 }
 
