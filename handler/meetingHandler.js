@@ -20,7 +20,7 @@ async function getMeetingDetail(meetingId) {
 
   const startDate = moment(meetingInformation.detail.startDate, dateFormat);
   const endDate = moment(meetingInformation.detail.endDate, dateFormat);
-  const dateMeeting = startDate.format('LLLL');
+  const dateMeeting = startDate.format(dateFormat);
   const nameMeeting = meetingInformation.detail.name;
   const durationMeeting = startDate.from(endDate, true);
 
