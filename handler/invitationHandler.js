@@ -1,5 +1,4 @@
 const debug = require('debug')('ma:handler:invitationHandler');
-const path = require('path');
 const nconf = require('nconf');
 const ejs = require('ejs');
 
@@ -20,7 +19,7 @@ async function sendInvitationFromMeeting(meetingId) {
       ...guest.meetingDetail,
       baseURI, meetingURL,
     }, (error, html) => {
-      if(error) throw error;
+      if (error) throw error;
 
       mailHandler(guest.email, subject, html);
     });
