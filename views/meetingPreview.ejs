@@ -375,9 +375,9 @@ Sizes: [
                                         <td align="left" class="textContent">
                                           <h3 style="color:#5F5F5F;line-height:125%;font-family:Helvetica,Arial,sans-serif;font-size:20px;font-weight:normal;margin-top:0;margin-bottom:3px;text-align:left;"><b>Detail Meeting</b></h3>
                                           <div style="text-align:left;font-family:Helvetica,Arial,sans-serif;font-size:15px;margin-bottom:0;color:#5F5F5F;line-height:135%;">
-                                            Name: <%- formattedDetails.nameMeeting %> <br>
-                                            Date: <%- formattedDetails.dateMeeting %> <br>
-                                            Duration: <%- formattedDetails.durationMeeting %> <br>
+                                            <%- formattedDetails.nameMeeting %> <br>
+                                            <%- formattedDetails.dateMeeting %> <br>
+                                            <%- formattedDetails.durationMeeting %> <br>
                                             <br>
                                           </div>
                                         </td>
@@ -388,14 +388,14 @@ Sizes: [
                                           <div style="text-align:left;font-family:Helvetica,Arial,sans-serif;font-size:15px;margin-bottom:0;color:#5F5F5F;line-height:135%;">
                                            <!-- List of Guests -->
                                             <table>
-                                            <% for(var guestIndex = 0; guestIndex < guests.length; guestIndex++) { %> 
+                                            <% for(var guestIndex = 0; guestIndex < guests.length; guestIndex++) { %>
                                              <tr>
                                               <td><%- guests[guestIndex].status ? (guests[guestIndex].status === 1 ? '✅' : '🚫' ) : '❓' %></td>
                                               <td><%- guests[guestIndex].name %></td>
                                              </tr>
-                                            <% } %> 
+                                            <% } %>
                                             </table>
-                                            
+
                                           </div>
                                         </td>
                                       </tr>
