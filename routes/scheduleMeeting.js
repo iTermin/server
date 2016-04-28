@@ -17,7 +17,7 @@ route.use((req, res, next) => {
  * @param meetingId Id of the crated meeting for a given user
  * */
 route.post('/', async (req, res, next) => {
-  const newMeetingInfo = req.body.meetingId;
+  const newMeetingInfo = req.body.meetingId.trim();
   try {
     if (!newMeetingInfo) throw new Error('Missing parameters');
 
