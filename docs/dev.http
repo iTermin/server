@@ -2,24 +2,24 @@
 # Emacs restclient examples for httpbin.org
 # http://httpbin.org/: HTTP Request & Response Service
 
-# Get the list of handled meetings.
+:host = http://localhost:3000
 :meetingID = 08830473-4478-4594-8DA2-DA931FAE4118
-#
 
-GET http://localhost:3000/meeting
+# Get the list of handled meetings.
+GET :host/meeting
 cache-control: no-cache
 
 # Send the invitation to a given meeting ID.
-POST http://localhost:3000/meeting
+POST :host/meeting
 cache-control: no-cache
 content-type: application/x-www-form-urlencoded
 
 meetingId=:meetingID
 
 # Render the meeting for the first guest.
-GET http://localhost:3000/meetingDetail/:meetingID/1?status=1
+GET :host/meetingDetail/:meetingID/1?status=1
 cache-control: no-cache
 
 # Render the meeting preview.
-GET http://localhost:3000/meetingDetail/:meetingID
+GET :host/meetingDetail/:meetingID
 cache-control: no-cache
