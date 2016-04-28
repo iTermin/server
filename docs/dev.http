@@ -1,6 +1,4 @@
 # -*- restclient -*-
-# Emacs restclient examples for httpbin.org
-# http://httpbin.org/: HTTP Request & Response Service
 
 :host = http://localhost:3000
 :meetingID = 08830473-4478-4594-8DA2-DA931FAE4118
