@@ -1,12 +1,52 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-   <head>
-      <title>
-         Hello World! 
-      </title>
-   </head>
-   <body>
-    <H1>Hello World!</H1>
-    <P>This is a test.</P>
-    </body>
+<!-- index.html -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>React</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react-dom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.5/marked.min.js"></script>
+  </head>
+  <body>
+    <div id="content"></div>
+    <script type="text/babel">
+
+		var CommentBox = React.createClass({
+  			render: function() {
+    			return (
+      				<div className="commentBox">
+						<h1>Comments</h1>
+        				<CommentList />
+        				<CommentForm />      				
+        			</div>
+    			);
+  			}
+		});
+
+		var CommentList = React.createClass({
+  			render: function() {
+    			return (
+      				<div className="commentList">Hello, world! I am a CommentList.</div>
+    			);
+  			}
+		});
+
+		var CommentForm = React.createClass({
+  			render: function() {
+    			return (
+      				<div className="commentForm">Hello, world! I am a CommentForm.</div>
+    			);
+  			}
+		});
+
+		ReactDOM.render(
+  			<CommentBox />,
+  			document.getElementById('content')
+		);
+
+    </script>
+  </body>
 </html>
