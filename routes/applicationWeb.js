@@ -1,11 +1,13 @@
 const express = require('express');
 
-const homePage = require('../webApplication/homePage');
-
 const route = express.Router();
 
-route.get('/', function (req, res) {
-  res.send('Hello World!');
+route.get('/', async (req, res, next) => {
+  try {
+    res.render('webApplication');
+  } catch (err) {
+    next(err);
+  }
 });
 
 module.exports = route;
