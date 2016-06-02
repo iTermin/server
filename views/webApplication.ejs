@@ -14,36 +14,67 @@
     <div id="content"></div>
     <script type="text/babel">
 
-		var CommentBox = React.createClass({
+		var MeetingsBox = React.createClass({
   			render: function() {
     			return (
-      				<div className="commentBox">
-						<h1>Comments</h1>
-        				<CommentList />
-        				<CommentForm />      				
+      				<div className="meetingsBox">
+						<h1>List of Meetings</h1>
+        				<MeetingsList data={this.props.data} />
         			</div>
     			);
   			}
 		});
 
-		var CommentList = React.createClass({
+		var MeetingsList = React.createClass({
   			render: function() {
+  				var infoMeeting = this.props.data.map(function(comment) {
+      				return (
+        				<Comment meeting={comment.name} key={comment.id}>
+          				{comment.date}
+        				</Comment>
+      				);
+		    });
+
     			return (
-      				<div className="commentList">Hello, world! I am a CommentList.</div>
+      				<div className="meetingsList">
+      					{infoMeeting}
+      				</div>
     			);
   			}
 		});
 
-		var CommentForm = React.createClass({
+		var Comment = React.createClass({
+			rawMarkup: function() {
+    			var rawMarkup = marked(this.props.children.toString(), {sanitize: true});
+    			return { __html: rawMarkup };
+  			},
   			render: function() {
     			return (
-      				<div className="commentForm">Hello, world! I am a CommentForm.</div>
+      				<div className="comment">
+      				<table>
+      					<tr>
+    						<td>
+    							<h3 className="infoMeeting">
+          							{this.props.meeting}
+        						</h3>
+    						</td>
+    						<td>
+    							<span dangerouslySetInnerHTML={this.rawMarkup()} />
+    						</td>
+  						</tr>
+      				</table>
+       				</div>
     			);
   			}
 		});
+
+		var data = [
+  			{id: 1, name: "Meeting 1", date: "20 Diciembre 2016 20:00hrs"},
+  			{id: 2, name: "Meeting 2", date: "21 Diciembre 2016 21:00hrs"}
+		];
 
 		ReactDOM.render(
-  			<CommentBox />,
+			<MeetingsBox data={data} />,
   			document.getElementById('content')
 		);
 
