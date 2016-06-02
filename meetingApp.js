@@ -9,6 +9,7 @@ const path = require('path');
 
 const scheduleMeeting = require('./routes/scheduleMeeting');
 const meetingDetail = require('./routes/meetingDetail');
+const applicationWeb = require('./routes/applicationWeb'); 
 
 const filePath = path.join(__dirname, 'config.json');
 nconf.argv().env().file(filePath);
@@ -21,6 +22,8 @@ meetingApp.use(bodyParser.json());
 meetingApp.use(bodyParser.urlencoded());
 meetingApp.use('/meetingDetail', meetingDetail);
 meetingApp.use('/meeting', scheduleMeeting);
+meetingApp.use('/home', applicationWeb);
+
 meetingApp.listen(port, () => {
   debug(`Live at Port ${port}`);
 });
