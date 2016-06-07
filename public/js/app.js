@@ -38,6 +38,7 @@ const Comment = React.createClass({
         return (
                 <div className="comment">
                 <table>
+                <tbody>
                 <tr>
                 <td>
                 <h3 className="infoMeeting">
@@ -48,6 +49,7 @@ const Comment = React.createClass({
                 <span dangerouslySetInnerHTML={this.rawMarkup()} />
                 </td>
                 </tr>
+                </tbody>
                 </table>
                 </div>
         );
