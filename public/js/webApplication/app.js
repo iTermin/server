@@ -3,12 +3,15 @@ import Footer from './components/Footer'
 import AddMeeting from './containers/AddMeeting'
 import VisibleMeetingsList from './containers/VisibleMeetingsList'
 
+import ReactDOM from "react-dom";
+
 const App = () => (
         <div>
-        <AddMeeting />
-        <VisibleMeetingsList />
-        <Footer />
+        Hola!
         </div>
 )
 
-export default App
+ReactDOM.render(
+        <App />,
+    document.body
+);

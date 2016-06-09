@@ -1,6 +1,6 @@
-import { connect } from 'react-redux'
-import { toggleMeeting } from '../actions'
-import MeetingsList from '../components/MeetingsList'
+import { connect } from 'react-redux';
+import { toggleMeeting } from '../actions';
+import MeetingsList from '../components/MeetingsList';
 
 const getVisibleMeetings = (meetings, filter) => {
     switch (filter) {

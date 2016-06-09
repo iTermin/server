@@ -4,9 +4,7 @@ var path = require('path');
 module.exports = {
     devtool: 'inline-source-map',
     entry: [
-        'webpack-dev-server/client?http://127.0.0.1:3000/',
-        'webpack/hot/only-dev-server',
-        './public/js/webApplication/app'
+        './public/js/webApplication/app.js'
     ],
     output: {
         path: path.join(__dirname, 'public'),
@@ -26,7 +24,6 @@ module.exports = {
         ]
     },
     plugins: [
-        new webpack.HotModuleReplacementPlugin(),
         new webpack.NoErrorsPlugin()
     ]
 };
