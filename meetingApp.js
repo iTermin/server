@@ -22,7 +22,7 @@ meetingApp.use(bodyParser.json());
 meetingApp.use(bodyParser.urlencoded());
 meetingApp.use('/meetingDetail', meetingDetail);
 meetingApp.use('/meeting', scheduleMeeting);
-meetingApp.use('/home', applicationWeb);
+meetingApp.use('/dashboard', applicationWeb);
 
 meetingApp.listen(port, () => {
   debug(`Live at Port ${port}`);
