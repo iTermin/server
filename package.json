@@ -4,7 +4,7 @@
     "description": "ServerMeetingApp",
     "main": "meetingApp.js",
     "scripts": {
-        "dev": "webpack --config webpack.config.js",
+        "prestart": "webpack --config webpack.config.js",
         "start": "DEBUG=ma:* babel-node meetingApp.js",
         "test": "echo \"Error: no test specified\" && exit 1",
         "lint": "eslint ."
