@@ -11,11 +11,12 @@ const scheduleMeeting = require('./routes/scheduleMeeting');
 const meetingDetail = require('./routes/meetingDetail');
 const applicationWeb = require('./routes/applicationWeb'); 
 
-const filePath = path.join(__dirname, 'config.json');
+const filePath = path.join(__dirname, '../config.json');
 nconf.argv().env().file(filePath);
 const port = nconf.get('PORT');
 
 const meetingApp = express();
+meetingApp.set('views', __dirname + '/views');
 meetingApp.set('view engine', 'ejs');
 meetingApp.use(express.static('public'));
 meetingApp.use(bodyParser.json());
