@@ -6,14 +6,14 @@ module.exports = {
     entry: [
         'webpack-dev-server/client?http://0.0.0.0:3000',
         'webpack/hot/only-dev-server',
-        './public/js/webApplication/app.js'
+        './client/app.js'
     ],
     output: {
-        path: path.join(__dirname, 'public'),
+        path: path.join(__dirname, 'public/js'),
         filename: 'bundle.js'
     },
     resolve: {
-        modulesDirectories: ['node_modules', 'public/js/webApplication'],
+        modulesDirectories: ['node_modules', 'client'],
         extensions: ['', '.js']
     },
     module: {

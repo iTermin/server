@@ -14,7 +14,7 @@ async function sendInvitationFromMeeting(meetingId) {
 
     const baseURI = nconf.get('BASE_URI');
     const meetingURL = `${baseURI}/meetingDetail/${meetingId}/${guestIndex}`;
-    ejs.renderFile('views/emailToGuest.ejs', {
+    ejs.renderFile('server/views/emailToGuest.ejs', {
       ...meetingGeneralInfo,
       ...guest.meetingDetail,
       baseURI, meetingURL,
