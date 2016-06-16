@@ -2,7 +2,7 @@
 
 let idMeeting = 0
 
-export const addMeeting = (text) => {
+function addMeeting(text){
     return {
         type: 'ADD_MEETING',
         id: idMeeting++,
@@ -10,16 +10,20 @@ export const addMeeting = (text) => {
     }
 }
 
-export const setVisibilityFilter = (filter) => {
+function setVisibilityFilter(filter){
     return {
         type: 'SET_VISIBILITY_FILTER',
         filter
     }
 }
 
-export const toggleMeeting = (id) => {
+function toggleMeeting(id){
     return {
         type: 'TOGGLE_MEETING',
         id
     }
+}
+
+module.exports = {
+    addMeeting, setVisibilityFilter, toggleMeeting
 }
