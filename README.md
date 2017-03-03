@@ -1,4 +1,4 @@
-# MeetingApp Server
+# Termin Server/API
 [![Stories in Ready](https://badge.waffle.io/xlarsx/servermeetingapp.png?label=ready&title=Ready)](http://waffle.io/xlarsx/servermeetingapp)
 
 ## Instalation
